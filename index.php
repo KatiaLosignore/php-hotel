@@ -40,6 +40,22 @@
 
     ];
 
+    $clicked= '';
+
+    if (isset($_GET['parking'])) {
+        $clicked = 'checked';
+
+        $parking_hotels = [];
+    
+        foreach($hotels as $hotel) {
+            if ($hotel['parking'])
+            $parking_hotels[] = $hotel;
+        }
+    
+        $hotels = $parking_hotels;
+
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +71,18 @@
     <body>
         <div class="container mt-5">
             <h1>Hotels</h1>
+            <form action="index.php" method="GET">
+                <div class="d-flex justify-content-between">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="parking" name="parking" <?php echo $clicked ?>>
+                        <label class="form-check-label" for="parking">
+                           Hotels con parcheggio
+                        </label>
+                    </div>
+                    <button class="btn btn-secondary">Filtra</button>
+                </div>
+            </form>
+
             <main>
                 <table class="table">
                     <thead>
