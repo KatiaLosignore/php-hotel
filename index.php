@@ -41,7 +41,9 @@
     ];
 
     $clicked= '';
+    $star = $_GET['vote'] ?? null;
 
+    //Filtro per il parcheggio
     if (isset($_GET['parking'])) {
         $clicked = 'checked';
 
@@ -54,6 +56,19 @@
     
         $hotels = $parking_hotels;
 
+    }
+
+    //Filtro per il voto
+    if($star) {
+        $parking_hotels = [];
+    
+        foreach($hotels as $hotel) {
+            if ($hotel['vote'] >= $star)
+            $parking_hotels[] = $hotel;
+        }
+
+        $hotels = $parking_hotels;
+    
     }
 
 ?>
@@ -70,16 +85,24 @@
     </head>
     <body>
         <div class="container mt-5">
-            <h1>Hotels</h1>
+            <h1 class="mb-4">Hotels</h1>
             <form action="index.php" method="GET">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-around mb-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="parking" name="parking" <?php echo $clicked ?>>
                         <label class="form-check-label" for="parking">
-                           Hotels con parcheggio
+                            <strong>Hotels con parcheggio</strong>
+                        </label>
+                    </div>
+                    <div>
+                        <input class="form-label" type="number" id="vote" name="vote" min="1" max="5" step="1" value="<?php echo $star ?>">
+                        <label for="vote" class="form-label">
+                           <strong>Voto</strong>
+                          
                         </label>
                     </div>
                     <button class="btn btn-secondary">Filtra</button>
+                    <a href="index.php" class="btn btn-primary" type="reset">Annulla</a>
                 </div>
             </form>
 
