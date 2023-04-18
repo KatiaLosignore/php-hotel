@@ -102,7 +102,7 @@
                         </label>
                     </div>
                     <button class="btn btn-secondary">Filtra</button>
-                    <a href="index.php" class="btn btn-primary" type="reset">Annulla</a>
+                    <a href="index.php" class="btn btn-primary">Annulla</a>
                 </div>
             </form>
 
